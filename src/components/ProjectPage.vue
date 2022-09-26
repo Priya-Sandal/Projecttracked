@@ -38,7 +38,7 @@ export default {
         return {
             projects: [],
             showDetailsIndex: null,
-            
+
 
         }
     },
@@ -141,7 +141,7 @@ a {
 .icons i:hover,
 a:hover {
     color: yellow;
-    
+
 }
 
 .icons i.greenHover:hover {
