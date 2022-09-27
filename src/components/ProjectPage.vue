@@ -1,11 +1,14 @@
 <template>
     <div class="nav">
-        <button class="filter">VIEW ALL</button>
-        <button class="filter">COMPLETED</button>
-        <button class="filter">ONGOING</button>
+        <button class="filter" :class="{active:  activebtn === 'btnn1'}"
+            @click="filterBySetValue('View All'), setActivebtnvalue('btnn1')">VIEW ALL</button>
+        <button class="filter" :class="{active:  activebtn === 'btnn2'}"
+            @click="filterBySetValue('Completed'), setActivebtnvalue('btnn2')">COMPLETED</button>
+        <button class="filter" :class="{active:  activebtn === 'btnn3'}"
+            @click="filterBySetValue('Ongoing'), setActivebtnvalue('btnn3')">ONGOING</button>
     </div>
 
-    <div v-if="projects.length === 0" class="project-box">
+    <div v-if="projects.length === 0" class="projectbox">
         <router-link to="/add-project" class="nav-menu">
             <div class="projectbox">
                 <p>No project added </p>
@@ -14,7 +17,8 @@
         </router-link>
     </div>
     <ul>
-        <li v-for="(element,index) in projects" v-bind:key="index" class="projectbox"
+        <li v-for="(element,index) in Filteredprojects" v-bind:key="index" class="projectbox"
+            @click.prevent.self="showDetails(index)"
             :class="{'green-border-left':element.completed, 'red-border-left' : !element.completed}">
             <span class="project-title">{{element.title}}</span>
             <span class="icons">
@@ -38,11 +42,20 @@ export default {
         return {
             projects: [],
             showDetailsIndex: null,
-            
+            activebtn: 'btnn1',
+            filterBy: 'View All'
+
 
         }
     },
     methods: {
+        filterBySetValue(value) {
+            this.filterBy = value;
+        },
+        setActivebtnvalue(value) {
+            this.activebtn = value;
+        },
+
 
         showDetails(index) {
             if (this.showDetailsIndex == index) {
@@ -71,9 +84,19 @@ export default {
     },
     created() {
         this.projects = JSON.parse(localStorage.getItem('projects') || "[]");
-
-
-
+    },
+    computed: {
+        Filteredprojects() {
+            
+            if (this.filterBy == 'completed') {
+                return this.projects.Filteredprojects(project => project.completed)
+            }
+            if (this.filterBy == 'ongoing') {
+                return this.projects.filter(project => project.completed)
+            }
+            return this.projects;
+            // return.Filteredprojects;
+        },
     }
 }
 </script>
@@ -124,7 +147,7 @@ export default {
 .project-detail {
     font-size: 1.07em;
     margin-top: 8px;
-    color: yellow;
+    color: black;
     margin-left: 1px;
 }
 
@@ -141,7 +164,7 @@ a {
 .icons i:hover,
 a:hover {
     color: yellow;
-    
+
 }
 
 .icons i.greenHover:hover {

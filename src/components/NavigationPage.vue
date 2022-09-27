@@ -11,6 +11,7 @@
         background-color: rgba(0, 0, 0, .2);
         padding: 15px;
         text-align: center;
+        
     }
     a.nav-menu {
         text-decoration: none;
