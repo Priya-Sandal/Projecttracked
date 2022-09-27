@@ -26,7 +26,7 @@ export default {
             title: "",
             detail: "",
             projects: [],
-            completed: false,
+
         };
     },
     methods: {
@@ -34,6 +34,7 @@ export default {
             this.projects.push({
                 'title': this.title,
                 'detail': this.detail,
+                'completed': false,
 
             })
             localStorage.setItem("projects", JSON.stringify(this.projects));
@@ -107,7 +108,7 @@ textarea {
     padding: 10px 20px;
     display: block;
     margin: 0 auto;
-    background-color: mediumseagreen;
+    background-color: rgb(123, 126, 124);
     color: white;
     border-radius: 10px;
     border: none;
