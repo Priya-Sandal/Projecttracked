@@ -88,7 +88,7 @@ export default {
     computed: {
         Filterprojects() {
             console.log(this.filterBy);
-            
+
             if (this.filterBy == 'Completed') {
                 return this.projects.filter(project => project.completed)
             }
@@ -97,7 +97,7 @@ export default {
                 return this.projects.filter(project => !project.completed)
             }
             return this.projects;
-        
+
         },
     }
 }
