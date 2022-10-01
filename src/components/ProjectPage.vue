@@ -17,7 +17,7 @@
         </router-link>
     </div>
     <ul>
-        <li v-for="(element,index) in Filteredprojects" v-bind:key="index" class="projectbox"
+        <li v-for="(element,index) in Filterprojects" v-bind:key="index" class="projectbox"
             @click.prevent.self="showDetails(index)"
             :class="{'green-border-left':element.completed, 'red-border-left' : !element.completed}">
             <span class="project-title">{{element.title}}</span>
@@ -86,16 +86,18 @@ export default {
         this.projects = JSON.parse(localStorage.getItem('projects') || "[]");
     },
     computed: {
-        Filteredprojects() {
+        Filterprojects() {
+            console.log(this.filterBy);
             
-            if (this.filterBy == 'completed') {
-                return this.projects.Filteredprojects(project => project.completed)
-            }
-            if (this.filterBy == 'ongoing') {
+            if (this.filterBy == 'Completed') {
                 return this.projects.filter(project => project.completed)
             }
+            console.log(this.filterBy);
+            if (this.filterBy == 'Ongoing') {
+                return this.projects.filter(project => !project.completed)
+            }
             return this.projects;
-            // return.Filteredprojects;
+        
         },
     }
 }
